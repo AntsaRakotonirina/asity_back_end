@@ -44,8 +44,10 @@ $v1Routes = function (){
             Route::apiResource('/scientifiques',ScientifiquesController::class)
             ->except(['index','show']);
         });
+        
     });
     Route::post('/login',[AuthController::class,'login']);
+    Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
     
 };
 
