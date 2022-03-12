@@ -36,7 +36,7 @@ class UsersController extends Controller
 
         return response([
             "message"=> "User created !",
-            "user" => new UserResource($user)
+            "data" => new UserResource($user)
         ],201);
     }
 

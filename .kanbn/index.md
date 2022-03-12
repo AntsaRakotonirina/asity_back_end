@@ -14,10 +14,9 @@ completedColumns:
 
 ## Todo
 
-- [grée-la-liste-d-animeaux](tasks/grée-la-liste-d-animeaux.md)
-
 ## In Progress
 
 ## Done
 
 - [se-connecter-au-systéme](tasks/se-connecter-au-systéme.md)
+- [grée-la-liste-d-animeaux](tasks/grée-la-liste-d-animeaux.md)
