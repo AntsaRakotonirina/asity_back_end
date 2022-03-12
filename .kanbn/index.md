@@ -9,12 +9,13 @@ completedColumns:
 
 ## Backlog
 
-- [gerée-la-liste-des-scientifiques](tasks/gerée-la-liste-des-scientifiques.md)
-- [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
-
 ## Todo
 
+- [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
+
 ## In Progress
+
+- [gerée-la-liste-des-scientifiques](tasks/gerée-la-liste-des-scientifiques.md)
 
 ## Done
 
