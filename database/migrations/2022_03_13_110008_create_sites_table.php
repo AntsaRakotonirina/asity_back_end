@@ -19,7 +19,7 @@ class CreateSitesTable extends Migration
             $table->string('nom');
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->foreignIdFor(Region::class)->cascadeOnDelete();
+            $table->foreignId('region_id')->constrained('regions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

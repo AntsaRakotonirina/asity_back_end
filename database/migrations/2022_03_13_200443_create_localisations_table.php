@@ -17,8 +17,8 @@ class CreateLocalisationsTable extends Migration
     {
         Schema::create('localisations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Site::class);
-            $table->foreignIdFor(Suivi::class);
+            $table->foreignId('site_id')->constrained('sites')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('suivi_id')->constrained('suivis')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class CreateParticipationsTable extends Migration
     {
         Schema::create('participations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Scientifique::class);
-            $table->foreignIdFor(Suivi::class);
+            $table->foreignId('scientifique_id')->constrained('scientifiques')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('suivi_id')->constrained('suivis')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

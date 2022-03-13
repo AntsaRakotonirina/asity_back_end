@@ -25,8 +25,8 @@ class CreateObservationsTable extends Migration
             $table->boolean('presence')->nullable();
             $table->string('zone','5')->nullable();
             $table->date('date')->nullable();
-            $table->foreignIdFor(Animal::class)->cascadeOnDelete();
-            $table->foreignIdFor(Suivi::class)->cascadeOnDelete();
+            $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('suivi_id')->constrained('suivis')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

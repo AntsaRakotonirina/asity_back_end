@@ -17,7 +17,7 @@ class CreateRegionsTable extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignIdFor(SiteParent::class)->cascadeOnDelete();
+            $table->foreignId('site_parent_id')->constrained('site_parents')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

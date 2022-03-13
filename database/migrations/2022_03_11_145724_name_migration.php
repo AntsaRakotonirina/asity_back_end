@@ -17,21 +17,21 @@ class NameMigration extends Migration
         Schema::create('nom_vernaculaires', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignIdFor(Animal::class)->cascadeOnDelete();
+            $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
         Schema::create('nom_scientifiques', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->date('mis_a_jour');
-            $table->foreignIdFor(Animal::class)->cascadeOnDelete();
+            $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
 
         Schema::create('nom_communs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignIdFor(Animal::class)->cascadeOnDelete();
+            $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
