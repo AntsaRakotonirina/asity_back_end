@@ -62,7 +62,7 @@ class ScientifiquesController extends Controller
     public function update(UpdateScientifiqueRequest $request, Scientifique $scientifique)
     {
         $scientifique->update($request->all());
-        return ["message"=>"Scientifique have been updated !","data"=>$scientifique];
+        return ["message"=>"Scientifique have been updated !","data"=>new ScientifiqueResource($scientifique)];
     }
 
     /**

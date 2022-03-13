@@ -12,8 +12,6 @@ use App\Http\Resources\NameResource;
 use App\Http\Resources\NoteResource;
 use App\Http\Resources\SciNameResource;
 use App\Models\Animal;
-use App\Models\NomCommun;
-use App\Models\NomVernaculaire;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -64,7 +62,7 @@ class AnimalsController extends Controller
     public function update(UpdateAnimalRequest $request, Animal $animaux)
     {
         $animaux->update($request->all());
-        return ["message"=>"Animal have been updated !","data"=>$animaux];
+        return ["message"=>"Animal have been updated !","data"=>new AnimalResource($animaux)];
     }
 
     /**

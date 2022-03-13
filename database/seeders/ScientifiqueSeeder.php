@@ -13,6 +13,6 @@ class ScientifiqueSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Scientifique::factory(50)->create();
+        \App\Models\Scientifique::factory(100)->create();
     }
 }

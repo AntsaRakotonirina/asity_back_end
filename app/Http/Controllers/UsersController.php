@@ -61,7 +61,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        return ["message"=>"User have been updated !"];
+        return ["message"=>"User have been updated !","data"=>new UserResource($user)];
     }
 
     /**

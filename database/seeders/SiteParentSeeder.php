@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class AnimalSeeder extends Seeder
+class SiteParentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class AnimalSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Animal::factory(300)->create();
+        \App\Models\SiteParent::factory(22)->create();
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NamesController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ScientifiquesController;
+use App\Http\Controllers\SitesParentController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,11 +44,11 @@ $v1Routes = function (){
             Route::delete('/notes/{note}',[NotesController::class,'destroy']);
             Route::apiResource('/scientifiques',ScientifiquesController::class)
             ->except(['index','show']);
+            Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
         });
-        
+        Route::apiResource('/siteparents',SitesParentController::class);
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
     
 };
 
