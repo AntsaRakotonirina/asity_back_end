@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Site;
+use App\Models\Suivi;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +17,8 @@ class CreateLocalisationsTable extends Migration
     {
         Schema::create('localisations', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Site::class);
+            $table->foreignIdFor(Suivi::class);
             $table->timestamps();
         });
     }

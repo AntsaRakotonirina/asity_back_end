@@ -13,7 +13,7 @@ class StoreLocalisationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreLocalisationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'site_id'=>'required|integer',
+            'suivi_id'=>"required|integer"
         ];
     }
 }

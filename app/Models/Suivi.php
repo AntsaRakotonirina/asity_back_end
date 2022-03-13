@@ -17,7 +17,7 @@ class Suivi extends Model
     }
 
     public function animals(){
-        return $this->belongsToMany(Animal::class,'observation');
+        return $this->belongsToMany(Animal::class,'observations');
     }
 
     public function participarions(){
@@ -25,6 +25,14 @@ class Suivi extends Model
     }
 
     public function scientifiques(){
-        return $this->belongsToMany(Scientifique::class,'participation');
+        return $this->belongsToMany(Scientifique::class,'participations');
+    }
+
+    public function localisations(){
+        return $this->hasMany(Localisation::class);
+    }
+
+    public function sites(){
+        return $this->belongsToMany(Site::class,'localisations');
     }
 }

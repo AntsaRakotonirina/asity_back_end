@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLocalisationRequest;
 use App\Http\Requests\UpdateLocalisationRequest;
+use App\Http\Resources\LocalisationResource;
 use App\Models\Localisation;
 
 class LocalisationController extends Controller
@@ -15,7 +16,7 @@ class LocalisationController extends Controller
      */
     public function index()
     {
-        //
+        return LocalisationResource::collection(Localisation::paginate(15));
     }
 
     /**
@@ -26,7 +27,11 @@ class LocalisationController extends Controller
      */
     public function store(StoreLocalisationRequest $request)
     {
-        //
+        $localisation = Localisation::create($request->all());
+        return response([
+            "message"=> "Observation created !",
+            "data" => new LocalisationResource($localisation)
+        ],201);
     }
 
     /**
@@ -37,7 +42,7 @@ class LocalisationController extends Controller
      */
     public function show(Localisation $localisation)
     {
-        //
+        return new LocalisationResource($localisation);
     }
 
     /**
@@ -49,7 +54,11 @@ class LocalisationController extends Controller
      */
     public function update(UpdateLocalisationRequest $request, Localisation $localisation)
     {
-        //
+        $localisation->update($request->all());
+        return [
+            "message"=> "Observation created !",
+            "data" => new LocalisationResource($localisation)
+        ];
     }
 
     /**
@@ -60,6 +69,7 @@ class LocalisationController extends Controller
      */
     public function destroy(Localisation $localisation)
     {
-        //
+        $localisation->delete();
+        return ["message"=>"Localisation have been deleted !"];
     }
 }

@@ -25,6 +25,6 @@ class Scientifique extends Model
         return $this->hasMany(Participation::class);
     }
     public function suivis(){
-        return $this->belongsToMany(Suivi::class,'participation');
+        return $this->belongsToMany(Suivi::class,'participations');
     }
 }

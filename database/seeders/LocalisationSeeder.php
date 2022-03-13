@@ -13,6 +13,6 @@ class LocalisationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Localisation::factory(100)->create();
     }
 }

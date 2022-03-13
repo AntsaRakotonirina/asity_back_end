@@ -18,4 +18,12 @@ class Site extends Model
     public function region(){
         return $this->belongsTo(Region::class);
     }
+
+    public function suivis(){
+        return $this->belongsToMany(Suivi::class,'localisations');
+    }
+
+    public function localisations(){
+        return $this->hasMany(Localisation::class);
+    }
 }

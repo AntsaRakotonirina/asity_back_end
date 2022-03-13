@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Scientifique;
+use App\Models\Suivi;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +17,8 @@ class CreateParticipationsTable extends Migration
     {
         Schema::create('participations', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Scientifique::class);
+            $table->foreignIdFor(Suivi::class);
             $table->timestamps();
         });
     }

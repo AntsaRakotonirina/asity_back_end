@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Localisation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
             SiteParentSeeder::class,
             SuiviSeeder::class,
             ObservationSeeder::class,
-            ParticipationSeeder::class
+            ParticipationSeeder::class,
+            LocalisationSeeder::class
         ]);
         \App\Models\User::factory(10)->create();
     }

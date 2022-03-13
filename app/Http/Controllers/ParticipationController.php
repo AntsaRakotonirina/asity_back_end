@@ -55,10 +55,10 @@ class ParticipationController extends Controller
     public function update(UpdateparticipationRequest $request, Participation $participation)
     {
         $participation->update($request->all());
-        return response([
+        return [
             "message"=>"Participation created !",
             "data"=> new ParticipationResource($participation)
-        ],201); 
+        ]; 
     }
 
     /**
