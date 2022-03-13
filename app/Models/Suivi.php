@@ -19,4 +19,12 @@ class Suivi extends Model
     public function animals(){
         return $this->belongsToMany(Animal::class,'observation');
     }
+
+    public function participarions(){
+        return $this->hasMany(Participation::class);
+    }
+
+    public function scientifiques(){
+        return $this->belongsToMany(Scientifique::class,'participation');
+    }
 }

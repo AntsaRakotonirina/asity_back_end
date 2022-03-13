@@ -20,4 +20,11 @@ class Scientifique extends Model
         'specialite',
         'telephone',
     ];
+
+    public function participations(){
+        return $this->hasMany(Participation::class);
+    }
+    public function suivis(){
+        return $this->belongsToMany(Suivi::class,'participation');
+    }
 }

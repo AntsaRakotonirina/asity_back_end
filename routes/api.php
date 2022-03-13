@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NamesController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ObservationsController;
+use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\RegionsController;
 use App\Http\Controllers\ScientifiquesController;
 use App\Http\Controllers\SitesController;
@@ -52,12 +53,13 @@ $v1Routes = function (){
             Route::apiResource('/siteparents',SitesParentController::class);
             Route::apiResource('regions',RegionsController::class);
             Route::apiResource('sites',SitesController::class);
+            Route::apiResource('suivis',SuivisController::class);
+            Route::apiResource('observations',ObservationsController::class);
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::apiResource('suivis',SuivisController::class);
-    Route::apiResource('observations',ObservationsController::class);
+    Route::apiResource('participation',ParticipationController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

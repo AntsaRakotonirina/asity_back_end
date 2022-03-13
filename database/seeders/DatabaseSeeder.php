@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             ScientifiqueSeeder::class,
             SiteParentSeeder::class,
             SuiviSeeder::class,
-            ObservationSeeder::class
+            ObservationSeeder::class,
+            ParticipationSeeder::class
         ]);
         \App\Models\User::factory(10)->create();
     }
