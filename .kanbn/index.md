@@ -11,9 +11,9 @@ completedColumns:
 
 ## Todo
 
-- [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
-
 ## In Progress
+
+- [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
 
 ## Done
 
