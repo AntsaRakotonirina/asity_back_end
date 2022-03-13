@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LocalisationController;
 use App\Http\Controllers\NamesController;
 use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ObservationsController;
@@ -59,7 +60,8 @@ $v1Routes = function (){
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::apiResource('participation',ParticipationController::class);
+    Route::apiResource('participations',ParticipationController::class);
+    Route::apiResource('localisations',LocalisationController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

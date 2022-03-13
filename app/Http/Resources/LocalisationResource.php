@@ -14,6 +14,14 @@ class LocalisationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id"=>$this->id,
+            "type"=>'Localisation',
+            "attributes"=>[
+                'site'=>$this->site->nom,
+                'site_id'=>$this->site_id,
+                'suivi_id'=>$this->suivi_id
+            ]
+        ];
     }
 }

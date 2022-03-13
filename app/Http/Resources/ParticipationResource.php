@@ -18,7 +18,7 @@ class ParticipationResource extends JsonResource
             'id'=>$this->id,
             'type'=>'Participation',
             'attributes'=>[
-                'scientifique'=>$this->scientifique->nom,
+                'scientifique'=>$this->scientifique->nom.' '.$this->scientifique->prenom,
                 'scientifique_id'=> $this->scientifique_id,
                 'suivi_id'=>$this->suivi_id
             ]
