@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AnimalSeeder::class,
             ScientifiqueSeeder::class,
-            SiteParentSeeder::class
+            SiteParentSeeder::class,
+            SuiviSeeder::class
         ]);
         \App\Models\User::factory(10)->create();
     }

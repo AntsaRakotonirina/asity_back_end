@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RegionResource extends JsonResource
+class SuiviResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,9 @@ class RegionResource extends JsonResource
     {
         return [
             "id"=>$this->id,
-            "type"=>'Region',
+            "type"=>'Suivi',
             "attributes"=> [
-                'nom' => $this->nom,
-                'site_parent_id' => $this->site_parent_id
+                'default_date' => $this->default_date
             ]
         ];
     }

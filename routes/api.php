@@ -8,6 +8,7 @@ use App\Http\Controllers\RegionsController;
 use App\Http\Controllers\ScientifiquesController;
 use App\Http\Controllers\SitesController;
 use App\Http\Controllers\SitesParentController;
+use App\Http\Controllers\SuivisController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +50,12 @@ $v1Routes = function (){
             Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
             Route::apiResource('/siteparents',SitesParentController::class);
             Route::apiResource('regions',RegionsController::class);
-            
+            Route::apiResource('sites',SitesController::class);
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::apiResource('sites',SitesController::class);
+    Route::apiResource('suivis',SuivisController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);
