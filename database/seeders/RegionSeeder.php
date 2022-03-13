@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class SiteParentSeeder extends Seeder
+class RegionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +13,6 @@ class SiteParentSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\SiteParent::factory(6)->has(
-            \App\Models\Region::factory(3)
-        )->create();
+        //
     }
 }

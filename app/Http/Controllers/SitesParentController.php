@@ -56,7 +56,10 @@ class SitesParentController extends Controller
     public function update(UpdateSiteParentRequest $request, SiteParent $siteparent)
     {
         $siteparent->update($request->all());
-        return ["message"=>"Animal have been updated !","data"=>new SiteParentResource($siteparent)];
+        return [
+            "message"=>"Parent have been updated !",
+            "data"=>new SiteParentResource($siteparent)
+        ];
     }
 
     /**
@@ -68,6 +71,6 @@ class SitesParentController extends Controller
     public function destroy(SiteParent $siteparent)
     {
         $siteparent->delete();
-        return ["message"=>"Animal have been deleted !"];
+        return ["message"=>"Parent have been deleted !"];
     }
 }

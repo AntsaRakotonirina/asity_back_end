@@ -20,4 +20,8 @@ class SiteParent extends Model
         'latitude',
         'longitude'
     ];
+
+    public function regions(){
+        return $this->hasMany(Region::class);
+    }
 }
