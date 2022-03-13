@@ -9,19 +9,18 @@ completedColumns:
 
 ## Backlog
 
-- [gerer-les-localisation-dans-les-suivis](tasks/gerer-les-localisation-dans-les-suivis.md)
-
 ## Todo
 
-- [gerée-les-participations-dans-les-suivi](tasks/gerée-les-participations-dans-les-suivi.md)
+- [gerer-les-localisation-dans-les-suivis](tasks/gerer-les-localisation-dans-les-suivis.md)
 
 ## In Progress
 
-- [gerer-les-observations-dans-les-suivi](tasks/gerer-les-observations-dans-les-suivi.md)
+- [gerée-les-participations-dans-les-suivi](tasks/gerée-les-participations-dans-les-suivi.md)
 
 ## Done
 
 - [se-connecter-au-systéme](tasks/se-connecter-au-systéme.md)
+- [gerer-les-observations-dans-les-suivi](tasks/gerer-les-observations-dans-les-suivi.md)
 - [grérer-les-suivis](tasks/grérer-les-suivis.md)
 - [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
 - [gerée-la-liste-des-scientifiques](tasks/gerée-la-liste-des-scientifiques.md)
