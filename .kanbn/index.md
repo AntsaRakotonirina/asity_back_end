@@ -11,15 +11,14 @@ completedColumns:
 
 ## Todo
 
-- [gerer-les-localisation-dans-les-suivis](tasks/gerer-les-localisation-dans-les-suivis.md)
-
 ## In Progress
 
-- [gerée-les-participations-dans-les-suivi](tasks/gerée-les-participations-dans-les-suivi.md)
+- [gerer-les-localisation-dans-les-suivis](tasks/gerer-les-localisation-dans-les-suivis.md)
 
 ## Done
 
 - [se-connecter-au-systéme](tasks/se-connecter-au-systéme.md)
+- [gerée-les-participations-dans-les-suivi](tasks/gerée-les-participations-dans-les-suivi.md)
 - [gerer-les-observations-dans-les-suivi](tasks/gerer-les-observations-dans-les-suivi.md)
 - [grérer-les-suivis](tasks/grérer-les-suivis.md)
 - [gérer-la-liste-des-localisation](tasks/gérer-la-liste-des-localisation.md)
