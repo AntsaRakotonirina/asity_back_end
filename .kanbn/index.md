@@ -13,6 +13,8 @@ completedColumns:
 
 ## In Progress
 
+- [search-functionality](tasks/search-functionality.md)
+
 ## Done
 
 - [se-connecter-au-systéme](tasks/se-connecter-au-systéme.md)

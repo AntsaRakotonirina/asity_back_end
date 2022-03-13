@@ -21,7 +21,8 @@ class ScientifiquesController extends Controller
      */
     public function index(FilterScientifiqueRequest $request)
     {
-        $scientifiques = Scientifique::where('nom','ilike',$request->input('search').'%')
+        $attribute = $request->input('attribute')? $request->input('attribute') : 'nom';
+        $scientifiques = Scientifique::where($attribute,'ilike',$request->input('search').'%')
                          ->orWhere('prenom','ilike',$request->input('search').'%')
                          ->paginate(15);
         return ScientifiqueResource::collection($scientifiques);
