@@ -14,8 +14,8 @@ class LocalisationFactory extends Factory
     public function definition()
     {
         return [
-            'site_id'=>$this->faker->random_int(1,100),
-            'suivi_id'=>$this->faker->random_int(1,100)
+            'site_id'=>$this->faker->numberBetween(1,100),
+            'suivi_id'=>$this->faker->numberBetween(1,100)
         ];
     }
 }
