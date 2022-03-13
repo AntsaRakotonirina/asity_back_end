@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Scientifique;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +17,8 @@ class DatabaseSeeder extends Seeder
             AnimalSeeder::class,
             ScientifiqueSeeder::class,
             SiteParentSeeder::class,
-            SuiviSeeder::class
+            SuiviSeeder::class,
+            ObservationSeeder::class
         ]);
         \App\Models\User::factory(10)->create();
     }

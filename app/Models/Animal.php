@@ -46,4 +46,21 @@ class Animal extends Model
     public function notes(){
         return $this->morphMany(Note::class,'noteable');
     }
+
+    public function observations(){
+        return $this->hasMany(Observation::class);
+    }
+
+    public function suivis(){
+        return $this->belongsToMany(Suivi::class,'observations');
+    }
+
+    public function nom(){
+        return $this
+        ->nomScientifiques()
+        ->select('nom')
+        ->orderByDesc('mis_a_jour')
+        ->first()
+        ;
+    }
 }

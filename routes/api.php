@@ -4,6 +4,7 @@ use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NamesController;
 use App\Http\Controllers\NotesController;
+use App\Http\Controllers\ObservationsController;
 use App\Http\Controllers\RegionsController;
 use App\Http\Controllers\ScientifiquesController;
 use App\Http\Controllers\SitesController;
@@ -56,6 +57,7 @@ $v1Routes = function (){
     });
     Route::post('/login',[AuthController::class,'login']);
     Route::apiResource('suivis',SuivisController::class);
+    Route::apiResource('observations',ObservationsController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

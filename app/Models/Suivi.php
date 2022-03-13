@@ -11,5 +11,12 @@ class Suivi extends Model
     protected $fillable=[
         'default_date'
     ];
-    
+
+    public function observations(){
+        return $this->hasMany(Observation::class);
+    }
+
+    public function animals(){
+        return $this->belongsToMany(Animal::class,'observation');
+    }
 }
