@@ -17,4 +17,7 @@ class Region extends Model
     public function siteParent(){
         return $this->belongsTo(SiteParent::class);
     }
+    public function sites(){
+        return $this->hasMany(Site::class);
+    }
 }

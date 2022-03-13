@@ -4,8 +4,9 @@ use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NamesController;
 use App\Http\Controllers\NotesController;
-use App\Http\Controllers\RegionController;
+use App\Http\Controllers\RegionsController;
 use App\Http\Controllers\ScientifiquesController;
+use App\Http\Controllers\SitesController;
 use App\Http\Controllers\SitesParentController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -47,11 +48,13 @@ $v1Routes = function (){
             ->except(['index','show']);
             Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
             Route::apiResource('/siteparents',SitesParentController::class);
+            Route::apiResource('regions',RegionsController::class);
+            
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::apiResource('regions',RegionController::class);
+    Route::apiResource('sites',SitesController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

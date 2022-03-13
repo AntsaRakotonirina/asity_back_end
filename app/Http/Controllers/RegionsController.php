@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateRegionRequest;
 use App\Http\Resources\RegionResource;
 use App\Models\Region;
 
-class RegionController extends Controller
+class RegionsController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -24,4 +24,8 @@ class SiteParent extends Model
     public function regions(){
         return $this->hasMany(Region::class);
     }
+
+    public function sites(){
+        return $this->hasManyThrough(Site::class,Region::class);
+    }
 }
