@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterObservationRequest;
+use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreObservationRequest;
 use App\Http\Requests\UpdateObservationRequest;
+use App\Http\Resources\NoteResource;
 use App\Http\Resources\ObservationResource;
 use App\Models\Observation;
 
@@ -14,9 +17,30 @@ class ObservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FilterObservationRequest $request)
     {
-        return ObservationResource::collection(Observation::paginate(15));
+        if($request->input('attribute') === 'animal'){
+            $observations = Observation::join('animaux','observations.animal_id','=','animaux.id')
+            ->join('nom_scientifiques','animaux.curent_name_id','=','nom_scientifiques.id')
+            ->where('nom_scientifiques.nom','ilike',$request->input('search').'%')
+            ->select(
+                'observations.id',
+                'observations.habitat',
+                'observations.latitude',
+                'observations.longitude',
+                'observations.nombre',
+                'observations.abondance',
+                'observations.presence',
+                'observations.zone',
+                'observations.animal_id',
+                'observations.suivi_id'
+            )
+            ->paginate(15)
+            ;
+        }else{
+            $observations = Observation::where($request->input('attribute'),'ilike',$request->input('search').'%')->paginate(15);
+        }
+        return ObservationResource::collection($observations);
     }
 
     /**
@@ -71,5 +95,13 @@ class ObservationsController extends Controller
     {
         $observation->delete();
         return ["message"=>"Observation have been deleted !"];
+    }
+
+    public function addNote(StoreNoteRequest $request, Observation $observation){
+        $note = $observation->notes()->create($request->all());
+        return response([
+            "message"=> "Note created !",
+            "data" => new NoteResource($note)
+        ],201);
     }
 }

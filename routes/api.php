@@ -54,15 +54,16 @@ $v1Routes = function (){
             Route::apiResource('/siteparents',SitesParentController::class);
             Route::apiResource('regions',RegionsController::class);
             Route::apiResource('sites',SitesController::class);
-            Route::apiResource('suivis',SuivisController::class);
-            Route::apiResource('observations',ObservationsController::class);
+            
+            
             Route::apiResource('participations',ParticipationController::class);
             Route::apiResource('localisations',LocalisationController::class);
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    
+    Route::apiResource('suivis',SuivisController::class);
+    Route::apiResource('observations',ObservationsController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

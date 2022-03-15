@@ -29,4 +29,8 @@ class Observation extends Model
     public function animal(){
         return $this->belongsTo(Animal::class);
     }
+
+    public function notes(){
+        return $this->morphMany(Note::class,'noteable');
+    }
 }

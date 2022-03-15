@@ -18,7 +18,7 @@ class LocalisationResource extends JsonResource
             "id"=>$this->id,
             "type"=>'Localisation',
             "attributes"=>[
-                'site'=>$this->site->nom,
+                'site'=>$this->site ? $this->site->nom : "",
                 'site_id'=>$this->site_id,
                 'suivi_id'=>$this->suivi_id
             ]

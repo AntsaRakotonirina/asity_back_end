@@ -27,12 +27,12 @@ class AnimalSingle extends JsonResource
                 'famille' => $this->famille,
                 'genre' => $this->genre,
                 'guild' => $this->guild,
-                'nom_courrant'=>$this->nom->nom,
+                'nom_courrant'=>$this->nom ? $this->nom->nom : "",
                 'status' => $this->status,
-                "nom_vernaculaires" => NameResource::collection($this->nomVernaculaires),
-                "nom_communs" => NameResource::collection($this->nomCommuns),
-                "nom_scientifiques" => SciNameResource::collection($this->nomScientifiques),
-                "notes"=> NoteResource::collection($this->notes)
+                "nom_vernaculaires" => $this->nomVernaculaires ? NameResource::collection($this->nomVernaculaires) : [],
+                "nom_communs" => $this->nomCommuns ? NameResource::collection($this->nomCommuns):[],
+                "nom_scientifiques" =>$this->nomScientifiques ? SciNameResource::collection($this->nomScientifiques) : [],
+                "notes"=>$this->notes ? NoteResource::collection($this->notes): []
             ]
         ];
     }

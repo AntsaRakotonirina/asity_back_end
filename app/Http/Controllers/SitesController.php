@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Http\Resources\SiteResource;
 use App\Models\Site;
+use Illuminate\Http\Request;
 
 class SitesController extends Controller
 {
@@ -14,9 +15,11 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return SiteResource::collection(Site::paginate(15));
+        return SiteResource::collection(
+            Site::where('nom','ilike',$request->input('search').'%')->paginate(15)
+        );
     }
 
     /**

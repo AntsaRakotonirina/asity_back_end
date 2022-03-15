@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreSuiviRequest;
 use App\Http\Requests\UpdateSuiviRequest;
+use App\Http\Resources\NoteResource;
+use App\Http\Resources\single\SuiviSingle;
 use App\Http\Resources\SuiviResource;
 use App\Models\Suivi;
 
@@ -30,7 +33,7 @@ class SuivisController extends Controller
         $suivi = Suivi::create($request->all());
         return response([
             "message"=> "Suivi created !",
-            "data" => new SuiviResource($suivi)
+            "data" => new SuiviSingle($suivi)
         ],201);
     }
 
@@ -42,7 +45,7 @@ class SuivisController extends Controller
      */
     public function show(Suivi $suivi)
     {
-        return new SuiviResource($suivi);
+        return new SuiviSingle($suivi);
     }
 
     /**
@@ -57,7 +60,7 @@ class SuivisController extends Controller
         $suivi->update($request->all());
         return response([
             "message"=> "Suivi created !",
-            "data" => new SuiviResource($suivi)
+            "data" => new SuiviSingle($suivi)
         ],201);
     }
 
@@ -71,5 +74,13 @@ class SuivisController extends Controller
     {
         $suivi->delete();
         return ["message"=>"Suivi have been deleted !"];
+    }
+
+    public function addNote(StoreNoteRequest $request, Suivi $suivi){
+        $note = $suivi->notes()->create($request->all());
+        return response([
+            "message"=> "Note created !",
+            "data" => new NoteResource($note)
+        ],201);
     }
 }

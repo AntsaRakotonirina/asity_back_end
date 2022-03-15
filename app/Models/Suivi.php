@@ -35,4 +35,8 @@ class Suivi extends Model
     public function sites(){
         return $this->belongsToMany(Site::class,'localisations');
     }
+    
+    public function notes(){
+        return $this->morphMany(Note::class,'noteable');
+    }
 }

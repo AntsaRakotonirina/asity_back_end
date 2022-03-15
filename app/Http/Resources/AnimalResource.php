@@ -22,7 +22,7 @@ class AnimalResource extends JsonResource
                 'espece'  => $this->espece,
                 'famille' => $this->famille,
                 'genre' => $this->genre,
-                'nom_courrant'=>$this->nom->nom,
+                'nom_courrant'=>$this->nom? $this->nom->nom : "",
                 'status' => $this->status
             ]
         ];

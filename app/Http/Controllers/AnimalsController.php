@@ -13,7 +13,6 @@ use App\Http\Resources\NoteResource;
 use App\Http\Resources\SciNameResource;
 use App\Http\Resources\single\AnimalSingle;
 use App\Models\Animal;
-use App\Models\NomScientifique;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller

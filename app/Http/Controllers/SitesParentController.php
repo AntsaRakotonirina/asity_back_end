@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSiteParentRequest;
 use App\Http\Requests\UpdateSiteParentRequest;
 use App\Http\Resources\SiteParentResource;
 use App\Models\SiteParent;
+use Illuminate\Http\Request;
 
 class SitesParentController extends Controller
 {
@@ -14,9 +15,12 @@ class SitesParentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return SiteParentResource::collection(SiteParent::paginate(15));
+        
+        return SiteParentResource::collection(
+            SiteParent::where('aireProteger','ilike',$request->input('search').'%')->paginate(15)
+        );
     }
 
     /**

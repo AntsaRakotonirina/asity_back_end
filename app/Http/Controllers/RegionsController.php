@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRegionRequest;
 use App\Http\Requests\UpdateRegionRequest;
 use App\Http\Resources\RegionResource;
 use App\Models\Region;
+use Illuminate\Http\Request;
 
 class RegionsController extends Controller
 {
@@ -14,9 +15,11 @@ class RegionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return RegionResource::collection(Region::paginate(15));
+        return RegionResource::collection(
+            Region::where('nom','ilike',$request->input('search').'%')->paginate(15)
+        );
     }
 
     /**
