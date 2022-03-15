@@ -13,8 +13,6 @@ completedColumns:
 
 ## In Progress
 
-- [upload-download-file](tasks/upload-download-file.md)
-
 ## Done
 
 - [se-connecter-au-systéme](tasks/se-connecter-au-systéme.md)

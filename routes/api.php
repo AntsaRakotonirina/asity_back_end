@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 $v1Routes = function (){
     //les requestes où il faut etre authentifier
+    
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/logout',[AuthController::class,'logout']);
         Route::get('/check',[AuthController::class,'checkAuth']);

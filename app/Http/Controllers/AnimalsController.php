@@ -13,6 +13,7 @@ use App\Http\Resources\NoteResource;
 use App\Http\Resources\SciNameResource;
 use App\Http\Resources\single\AnimalSingle;
 use App\Models\Animal;
+use DateTime;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -63,9 +64,14 @@ class AnimalsController extends Controller
     public function store(StoreAnimalRequest $request)
     {
         $animaux = Animal::create($request->all());
+        $date = new DateTime();
+        $name = $animaux->nomScientifiques()->create(['nom'=>$animaux->genre.' '.$animaux->espece,'mis_a_jour'=>$date->format('d-m-Y')]);
+        $animaux->curent_name_id =  $name->id;
+        $animaux->save();
         return response([
             "message"=> "Animal created !",
-            "data" => new AnimalSingle($animaux)
+            // "data" => new AnimalSingle($animaux)
+            "data" => new AnimalResource($animaux)
         ],201);
     }
 

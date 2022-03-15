@@ -14,15 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            AnimalSeeder::class,
-            ScientifiqueSeeder::class,
-            SiteParentSeeder::class,
-            SuiviSeeder::class,
-            ObservationSeeder::class,
-            ParticipationSeeder::class,
-            LocalisationSeeder::class
-        ]);
-        \App\Models\User::factory(10)->create();
+        // $this->call([
+        //     AnimalSeeder::class,
+        //     ScientifiqueSeeder::class,
+        //     SiteParentSeeder::class,
+        //     SuiviSeeder::class,
+        //     ObservationSeeder::class,
+        //     ParticipationSeeder::class,
+        //     LocalisationSeeder::class
+        // ]);
+        \App\Models\User::factory(5)->create();
     }
 }
