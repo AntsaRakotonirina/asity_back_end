@@ -17,11 +17,12 @@ class CreateAnimalsTable extends Migration
             $table->id();
             $table->string('categorie')->nullable();
             $table->string('endemicite')->nullable();
-            $table->string('espece')->nullable();
+            $table->string('espece');
             $table->string('famille');
             $table->string('genre');
             $table->string('guild')->nullable();
             $table->string('status')->nullable();
+            $table->bigInteger('curent_name_id')->unique()->nullable();
             $table->timestamps();
         });
     }

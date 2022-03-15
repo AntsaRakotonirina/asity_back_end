@@ -11,7 +11,9 @@ use App\Http\Resources\AnimalResource;
 use App\Http\Resources\NameResource;
 use App\Http\Resources\NoteResource;
 use App\Http\Resources\SciNameResource;
+use App\Http\Resources\single\AnimalSingle;
 use App\Models\Animal;
+use App\Models\NomScientifique;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -22,7 +24,34 @@ class AnimalsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(FilterAnimalRequest $request){
-        $animals = Animal::where($request->input('attribute'),'ilike',$request->input('search').'%')->paginate(15);
+
+        /**
+         * La recherche par nom scientifique est  plus complexe car le nom se trouve sur une autre table
+         */
+        if($request->input('attribute') === 'nom'){
+            //on recherche les nom scientifique correspondant
+            // $names = NomScientifique::where('nom','ilike',$request->input('search').'%')->get();
+            // $keys = $names->modelKeys();
+            // $animals = 
+            $animals = Animal::join('nom_scientifiques','animaux.curent_name_id','=','nom_scientifiques.id')
+            ->where('nom_scientifiques.nom','ilike',$request->input('search').'%')
+            ->select(
+            'animaux.id',
+            'animaux.categorie',
+            'animaux.endemicite',
+            'animaux.espece',
+            'animaux.famille',
+            'animaux.genre',
+            'animaux.guild',
+            'animaux.curent_name_id',
+            'animaux.status'
+            )
+            ->paginate(15);
+        }else{
+            $animals = Animal::where($request->input('attribute'),'ilike',$request->input('search').'%')->paginate(15);
+        }
+
+        
         return AnimalResource::collection($animals);
     }
 
@@ -37,7 +66,7 @@ class AnimalsController extends Controller
         $animaux = Animal::create($request->all());
         return response([
             "message"=> "Animal created !",
-            "data" => new AnimalResource($animaux)
+            "data" => new AnimalSingle($animaux)
         ],201);
     }
 
@@ -62,7 +91,7 @@ class AnimalsController extends Controller
     public function update(UpdateAnimalRequest $request, Animal $animaux)
     {
         $animaux->update($request->all());
-        return ["message"=>"Animal have been updated !","data"=>new AnimalResource($animaux)];
+        return ["message"=>"Animal have been updated !","data"=>new AnimalSingle($animaux)];
     }
 
     /**

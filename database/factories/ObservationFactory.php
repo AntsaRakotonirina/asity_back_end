@@ -19,7 +19,7 @@ class ObservationFactory extends Factory
             'zone'=>Str::random(1).$this->faker->numberBetween(0,9),
             'latitude'=>$this->faker->latitude(),
             'longitude'=>$this->faker->longitude(),
-            'animal_id'=>$this->faker->numberBetween(1,300),
+            'animal_id'=>$this->faker->numberBetween(1,100),
             'suivi_id'=>$this->faker->numberBetween(1,30),
             'date'=>$this->faker->date()
         ];

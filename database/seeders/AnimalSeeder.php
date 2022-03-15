@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Animal;
+use App\Models\NomCommun;
+use App\Models\NomScientifique;
+use App\Models\NomVernaculaire;
 use Illuminate\Database\Seeder;
 
 class AnimalSeeder extends Seeder
@@ -13,6 +17,17 @@ class AnimalSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Animal::factory(300)->create();
+        Animal::factory(100)
+        ->has(NomCommun::factory(3))
+        ->has(NomVernaculaire::factory(3))
+        ->has(NomScientifique::factory(3))
+        ->create();
+
+        $animals = Animal::all();
+        foreach($animals as $animal){
+            $sciname = $animal->nomScientifiques()->first();
+            $animal->curent_name_id = $sciname->id;
+            $animal->save();
+        }
     }
 }

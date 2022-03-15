@@ -24,8 +24,7 @@ class FilterAnimalRequest extends FormRequest
     public function rules()
     {
         return [
-            'attribute'=>'required|in:categorie,endemicite,espece,famille,genre,guild,status',
-            'search'=>'string',
+            'attribute'=>'required|in:categorie,endemicite,espece,famille,genre,guild,status,nom'
         ];
     }
 }

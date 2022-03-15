@@ -56,12 +56,13 @@ $v1Routes = function (){
             Route::apiResource('sites',SitesController::class);
             Route::apiResource('suivis',SuivisController::class);
             Route::apiResource('observations',ObservationsController::class);
+            Route::apiResource('participations',ParticipationController::class);
+            Route::apiResource('localisations',LocalisationController::class);
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    Route::apiResource('participations',ParticipationController::class);
-    Route::apiResource('localisations',LocalisationController::class);
+    
 };
 
 Route::prefix('/v1')->group($v1Routes);

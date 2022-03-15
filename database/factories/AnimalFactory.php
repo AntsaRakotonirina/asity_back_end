@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\NomScientifique;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 

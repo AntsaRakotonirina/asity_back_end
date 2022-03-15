@@ -56,11 +56,6 @@ class Animal extends Model
     }
 
     public function nom(){
-        return $this
-        ->nomScientifiques()
-        ->select('nom')
-        ->orderByDesc('mis_a_jour')
-        ->first()
-        ;
+        return $this->belongsTo(NomScientifique::class,'curent_name_id');
     }
 }

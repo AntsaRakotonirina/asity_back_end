@@ -22,6 +22,6 @@ class SciNameResource extends JsonResource
                 "mis_a_jour"=>$this->mis_a_jour,
                 "animal_id"=>$this->animal_id
             ]
-        ];;
+        ];
     }
 }

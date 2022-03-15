@@ -18,7 +18,7 @@ class AuthController extends Controller
         if(!$user){ 
             return response([
                 'message'=>'Auth error',
-                'error'=>["user"=>['User not found']],
+                'errors'=>["user"=>['User not found']],
             ],404); 
         }
 
@@ -27,7 +27,7 @@ class AuthController extends Controller
         if(!$password_match){ 
             return response([
                 'message'=>'Auth error',
-                'error'=>["password"=>['Password doesn\'t match']],
+                'errors'=>["password"=>['Password doesn\'t match']],
             ],401);
         }
 
