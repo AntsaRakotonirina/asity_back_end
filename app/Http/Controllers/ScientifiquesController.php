@@ -78,13 +78,22 @@ class ScientifiquesController extends Controller
         return ["message"=>"Scientifique have been deleted !"];
     }
 
+    /**
+     * Upload a file for mass affectations
+     * @param  \Illuminate\Http\Request;  $request
+     */
     public function storeFile(Request $request){
         $file = $request->file('file');
+
+        //si le fichier est valid
         if ($file->isValid()) {
             $extension =  $file->getClientOriginalExtension();
+            //on verifie si on a bien un csv
             if ($extension == "csv") {
+                //on crée le nom du fichier
                 $date = new DateTime();
                 $name = $date->format('d_m_Y') . '_scientifiques.' . $extension;
+                //
                 $file->storeAs('csv/upload', $name);
                 $result = $this->recordWhithFile($name);
                 if (!$result) {
@@ -99,6 +108,10 @@ class ScientifiquesController extends Controller
         }
     }
 
+    /**
+     * Create entitie with file
+     * @param String $path where to store the file
+     */
     private function recordWhithFile($path){
         $url = Storage::path('csv/upload/' . $path);
         return DB::statement("
@@ -107,5 +120,19 @@ class ScientifiquesController extends Controller
             FROM '$url'
             WITH DELIMITER ',' CSV HEADER
         ");
+    }
+
+    public function saveFile(){
+        $date = new DateTime();
+        $name = $date->format('d_m_Y_s') . '_scientifiques.csv';
+        $url = Storage::path('csv/download/'.$name);
+        Storage::put('csv/download/'.$name,'');
+        return DB::statement("
+            COPY 
+            scientifiques
+            TO '$url'
+            WITH DELIMITER ',' CSV HEADER
+        ");
+        return Storage::download('csv/download/'.$name);
     }
 }

@@ -105,6 +105,12 @@ class AnimalsController extends Controller
         return ["message"=>"Animal have been deleted !"];
     }
 
+    /**
+     * Ajouter un nom vernaculaire
+     * @param Illuminate\Http\Request
+     * @param  \App\Models\Animal  $animaux
+     * @return \Illuminate\Http\Response
+     */
     public function addVerName(Request $request,Animal $animaux){
         $creds = $request->validate([
             "nom"=>"required"
@@ -124,6 +130,12 @@ class AnimalsController extends Controller
         ],422);
     }
 
+    /**
+     * Ajouter un nom commun
+     * @param Illuminate\Http\Request
+     * @param  \App\Models\Animal  $animaux
+     * @return \Illuminate\Http\Response
+     */
     public function addComnName(Request $request,Animal $animaux){
         $creds = $request->validate([
             "nom"=>"required"
@@ -143,6 +155,12 @@ class AnimalsController extends Controller
         ],422);
     }
     
+    /**
+     * Ajouter un nom scientifique
+     * @param \App\Http\Requests\StoreSciNameRequest
+     * @param  \App\Models\Animal  $animaux
+     * @return \Illuminate\Http\Response
+     */
     public function addSciName(StoreSciNameRequest $request,Animal $animaux){
         $sciname = $animaux->nomScientifiques()->create($request->all());
         return response([
@@ -151,6 +169,12 @@ class AnimalsController extends Controller
         ],201);
     }
 
+    /**
+     * Ajouter une note
+     * @param \App\Http\Requests\StoreNoteRequest $request
+     * @param  \App\Models\Animal  $animaux
+     * @return \Illuminate\Http\Response
+     */
     public function addNote(StoreNoteRequest $request, Animal $animaux){
         $note = $animaux->notes()->create($request->all());
         return response([
