@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AutocompleteAnimalRequest;
 use App\Http\Requests\FilterAnimalRequest;
 use App\Http\Requests\StoreAnimalRequest;
 use App\Http\Requests\StoreNoteRequest;
@@ -189,5 +190,12 @@ class AnimalsController extends Controller
         ],201);
     }
 
-    
+    public function autoComplete(AutocompleteAnimalRequest $request){
+        $values = Animal::select($request->input('attribute').' as value')
+        ->distinct()
+        ->where($request->input('attribute'),'ilike',$request->input('search').'%')
+        ->limit(20)
+        ->get();
+        return $values;
+    }
 }

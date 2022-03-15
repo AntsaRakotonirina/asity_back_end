@@ -64,7 +64,9 @@ $v1Routes = function (){
     });
     Route::post('/login',[AuthController::class,'login']);
     
-    
+    Route::prefix('autocomplete')->group(function(){
+        Route::get('animaux',[AnimalsController::class,'autoComplete']);
+    });
 };
 
 Route::prefix('/v1')->group($v1Routes);
