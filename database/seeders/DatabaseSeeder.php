@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Localisation;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,5 +25,10 @@ class DatabaseSeeder extends Seeder
             LocalisationSeeder::class
         ]);
         \App\Models\User::factory(5)->create();
+        \App\Models\User::create([
+            'name'=>'Admin',
+            'isAdmin'=> true,
+            'password' => Hash::make('admin')
+        ]);
     }
 }

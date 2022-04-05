@@ -23,8 +23,6 @@ class FilterScientifiqueRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'search'=>'string'
-        ];
+        return [];
     }
 }

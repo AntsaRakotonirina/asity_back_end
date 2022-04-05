@@ -20,6 +20,7 @@ class CreateAnimalsTable extends Migration
             $table->string('espece');
             $table->string('famille');
             $table->string('genre');
+            $table->string('count_type');
             $table->string('guild')->nullable();
             $table->string('status')->nullable();
             $table->bigInteger('curent_name_id')->unique()->nullable();

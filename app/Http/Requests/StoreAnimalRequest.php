@@ -25,7 +25,8 @@ class StoreAnimalRequest extends FormRequest
     {
         return [
             "famille"=>"required|string",
-            "genre"=>"required|string"
+            "genre"=>"required|string",
+            "count_type"=>"in:nombre,abondance,presence"
         ];
     }
 }

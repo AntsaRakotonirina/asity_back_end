@@ -15,10 +15,10 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $myArray = [1,2,3,4,5,6];
+        $isAdmin = [true,false];
         return [
             'name' => $this->faker->unique()->firstName(),
-            'isAdmin' => Arr::random($myArray)%2 === 0 ? true : false,
+            'isAdmin' => Arr::random($isAdmin),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ];
     }

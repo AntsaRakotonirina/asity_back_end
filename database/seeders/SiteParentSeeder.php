@@ -13,10 +13,10 @@ class SiteParentSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\SiteParent::factory(6)->has(
-            \App\Models\Region::factory(3)
+        \App\Models\SiteParent::factory(20)->has(
+            \App\Models\Region::factory(20)
             ->has(
-                \App\Models\Site::factory(10)
+                \App\Models\Site::factory(20)
             )
         )->create();
     }

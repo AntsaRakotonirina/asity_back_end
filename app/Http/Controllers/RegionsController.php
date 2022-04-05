@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRegionRequest;
 use App\Http\Requests\UpdateRegionRequest;
 use App\Http\Resources\RegionResource;
+use App\Http\Resources\SiteResource;
 use App\Models\Region;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class RegionsController extends Controller
     public function index(Request $request)
     {
         return RegionResource::collection(
-            Region::where('nom','ilike',$request->input('search').'%')->paginate(15)
+            Region::where('nom','ilike',$request->input('search').'%')->orderBy('nom')->paginate(15)
         );
     }
 
@@ -75,5 +76,10 @@ class RegionsController extends Controller
     {
         $region->delete();
         return ["message"=>"Region have been deleted !"];
+    }
+
+    public function sites(Region $region)
+    {
+        return SiteResource::collection($region->sites()->orderBy('nom')->paginate(15));
     }
 }

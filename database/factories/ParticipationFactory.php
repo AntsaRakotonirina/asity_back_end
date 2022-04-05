@@ -14,7 +14,8 @@ class ParticipationFactory extends Factory
     public function definition()
     {
         return [
-            'suivi_id'=>$this->faker->numberBetween(1,30),
+            // 'suivi_id'=>$this->faker->numberBetween(1,300),
+            'suivi_id'=>1,
             'scientifique_id'=>$this->faker->numberBetween(1,100)
         ];
     }

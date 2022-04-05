@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSiteParentRequest;
 use App\Http\Requests\UpdateSiteParentRequest;
+use App\Http\Resources\RegionResource;
 use App\Http\Resources\SiteParentResource;
 use App\Models\SiteParent;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class SitesParentController extends Controller
     {
         
         return SiteParentResource::collection(
-            SiteParent::where('aireProteger','ilike',$request->input('search').'%')->paginate(15)
+            SiteParent::where('aireProteger','ilike',$request->input('search').'%')->orderBy('aireProteger')->paginate(15)
         );
     }
 
@@ -76,5 +77,9 @@ class SitesParentController extends Controller
     {
         $siteparent->delete();
         return ["message"=>"Parent have been deleted !"];
+    }
+
+    public function regions(SiteParent $siteparent){
+       return RegionResource::collection($siteparent->regions()->orderBy('nom')->paginate(15));
     }
 }

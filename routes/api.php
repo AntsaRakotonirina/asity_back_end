@@ -48,25 +48,32 @@ $v1Routes = function (){
             });
             Route::delete('/noms/{type}/{id}',[NamesController::class,'deleteName']);
             Route::post('/animaux/{animaux}/notes/',[AnimalsController::class,'addNote']);
-            Route::delete('/notes/{note}',[NotesController::class,'destroy']);
+            
             Route::apiResource('/scientifiques',ScientifiquesController::class)
             ->except(['index','show']);
             Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
-            Route::apiResource('/siteparents',SitesParentController::class);
+            Route::apiResource('siteparents',SitesParentController::class);
             Route::apiResource('regions',RegionsController::class);
-            Route::apiResource('sites',SitesController::class);
-            Route::apiResource('suivis',SuivisController::class);
-            Route::apiResource('observations',ObservationsController::class);
-            Route::apiResource('participations',ParticipationController::class);
-            Route::apiResource('localisations',LocalisationController::class);
+            
+            
+            Route::post('suivis/{suivi}/notes',[SuivisController::class,'addNote']);
+            
         });
         
     });
     Route::post('/login',[AuthController::class,'login']);
-    
+    Route::get('siteparents/{siteparent}/regions',[SitesParentController::class,'regions']);
+    Route::get('regions/{region}/sites',[RegionsController::class,'sites']);
     Route::prefix('autocomplete')->group(function(){
         Route::get('animaux',[AnimalsController::class,'autoComplete']);
     });
+    Route::delete('/notes/{note}',[NotesController::class,'destroy']);
+    Route::apiResource('suivis',SuivisController::class);
+    Route::get('analyse/animaux/{animaux}',[AnimalsController::class,'analyse']);
+    Route::apiResource('observations',ObservationsController::class);
+    Route::apiResource('participations',ParticipationController::class);
+    Route::apiResource('localisations',LocalisationController::class);
+    Route::apiResource('sites',SitesController::class);
 };
 
 Route::prefix('/v1')->group($v1Routes);

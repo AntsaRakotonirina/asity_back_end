@@ -15,7 +15,8 @@ class LocalisationFactory extends Factory
     {
         return [
             'site_id'=>$this->faker->numberBetween(1,100),
-            'suivi_id'=>$this->faker->numberBetween(1,30)
+            // 'suivi_id'=>$this->faker->numberBetween(1,300)
+            'suivi_id'=>1
         ];
     }
 }

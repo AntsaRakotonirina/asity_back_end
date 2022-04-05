@@ -20,7 +20,7 @@ class Suivi extends Model
         return $this->belongsToMany(Animal::class,'observations');
     }
 
-    public function participarions(){
+    public function participations(){
         return $this->hasMany(Participation::class);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreObservationRequest extends FormRequest
+class FilterSuiviRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class StoreObservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'date'=>'required|date',
-            'animal_id'=>'required|integer',
-            'suivi_id'=>'required|integer',
+            'from'=> 'date',
+            'to'=> 'date'
         ];
     }
 }

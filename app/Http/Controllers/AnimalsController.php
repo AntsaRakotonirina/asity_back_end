@@ -31,11 +31,8 @@ class AnimalsController extends Controller
          */
         if($request->input('attribute') === 'nom'){
             //on recherche les nom scientifique correspondant
-            // $names = NomScientifique::where('nom','ilike',$request->input('search').'%')->get();
-            // $keys = $names->modelKeys();
-            // $animals = 
             $animals = Animal::join('nom_scientifiques','animaux.curent_name_id','=','nom_scientifiques.id')
-            ->where('nom_scientifiques.nom','ilike',$request->input('search').'%')
+            ->where('nom_scientifiques.nom','ilike',$request->input('query').'%')
             ->select(
             'animaux.id',
             'animaux.categorie',
@@ -49,7 +46,10 @@ class AnimalsController extends Controller
             )
             ->paginate(15);
         }else{
-            $animals = Animal::where($request->input('attribute'),'ilike',$request->input('search').'%')->paginate(15);
+            $animals = Animal::
+            where($request->input('attribute'),'ilike',$request->input('query').'%')
+            ->orderBy($request->input('attribute'))
+            ->paginate(15);
         }
 
         
@@ -71,7 +71,6 @@ class AnimalsController extends Controller
         $animaux->save();
         return response([
             "message"=> "Animal created !",
-            // "data" => new AnimalSingle($animaux)
             "data" => new AnimalResource($animaux)
         ],201);
     }
@@ -84,7 +83,7 @@ class AnimalsController extends Controller
      */
     public function show(Animal $animaux)
     {
-        return new AnimalResource($animaux);
+        return new AnimalSingle($animaux);
     }
 
     /**
@@ -197,5 +196,24 @@ class AnimalsController extends Controller
         ->limit(20)
         ->get();
         return $values;
+    }
+
+    public function analyse(Animal $animaux){
+        if($animaux->count_type === 'nombre'){
+            return $animaux->observations()
+            ->selectRaw('EXTRACT( YEAR FROM date) as x, nombre as y')
+            ->orderByRaw('x')
+            ->get();
+        }elseif ($animaux->count_type === 'abondance') {
+            return $animaux->observations()
+            ->selectRaw('EXTRACT( YEAR FROM date) as x, abondance as y')
+            ->orderByRaw('x')
+            ->get();
+        }elseif ($animaux->count_type === 'presence'){
+            return $animaux->observations()
+            ->selectRaw('EXTRACT( YEAR FROM date) as x, presence as y')
+            ->orderByRaw('x')
+            ->get();
+        }
     }
 }

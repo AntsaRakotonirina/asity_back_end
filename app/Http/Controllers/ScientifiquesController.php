@@ -21,9 +21,9 @@ class ScientifiquesController extends Controller
      */
     public function index(FilterScientifiqueRequest $request)
     {
-        $attribute = $request->input('attribute')? $request->input('attribute') : 'nom';
-        $scientifiques = Scientifique::where($attribute,'ilike',$request->input('search').'%')
-                         ->orWhere('prenom','ilike',$request->input('search').'%')
+        $scientifiques = Scientifique::where('nom','ilike',$request->input('query').'%')
+                         ->orWhere('prenom','ilike',$request->input('query').'%')
+                         ->orderBy('nom')
                          ->paginate(15);
         return ScientifiqueResource::collection($scientifiques);
     }
@@ -115,7 +115,7 @@ class ScientifiquesController extends Controller
     private function recordWhithFile($path){
         $url = Storage::path('csv/upload/' . $path);
         return DB::statement("
-            COPY 
+            COPY
             scientifiques (nom,prenom,telephone,email,specialite)
             FROM '$url'
             WITH DELIMITER ',' CSV HEADER
@@ -128,7 +128,7 @@ class ScientifiquesController extends Controller
         $url = Storage::path('csv/download/'.$name);
         Storage::put('csv/download/'.$name,'');
         return DB::statement("
-            COPY 
+            COPY
             scientifiques
             TO '$url'
             WITH DELIMITER ',' CSV HEADER

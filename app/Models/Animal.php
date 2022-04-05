@@ -21,7 +21,9 @@ class Animal extends Model
         'famille',
         'genre' ,
         'guild',
-        'status'
+        'status',
+        'count_type',
+        'curent_name_id'
     ];
 
     /**

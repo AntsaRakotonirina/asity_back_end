@@ -18,7 +18,8 @@ class SuiviResource extends JsonResource
             "id"=>$this->id,
             "type"=>'Suivi',
             "attributes"=> [
-                'default_date' => $this->default_date
+                'default_date' => $this->default_date,
+                'first_localisation' => new LocalisationResource($this->localisations()->first())
             ]
         ];
     }

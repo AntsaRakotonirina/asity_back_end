@@ -13,6 +13,6 @@ class SuiviSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Suivi::factory(30)->create();
+        \App\Models\Suivi::factory(300)->create();
     }
 }

@@ -25,7 +25,7 @@ class SuiviSingle extends JsonResource
                 'default_date' => $this->default_date,
                 'notes'=> $this->notes ? NoteResource::collection($this->notes): [],
                 'localisations'=>$this->localisations ? LocalisationResource::collection($this->localisations):[],
-                'obsevations'=> $this->observations ? ObservationResource::collection($this->observations):[],
+                'observations'=> $this->observations ? ObservationResource::collection($this->observations):[],
                 'participations'=> $this->participations ? ParticipationResource::collection($this->participations) : [],
             ]
         ];;

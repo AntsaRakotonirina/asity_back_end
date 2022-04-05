@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreLocalisationRequest;
 use App\Http\Requests\UpdateLocalisationRequest;
 use App\Http\Resources\LocalisationResource;
@@ -14,9 +15,18 @@ class LocalisationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SearchRequest $request)
     {
-        return LocalisationResource::collection(Localisation::paginate(15));
+        $participations = Localisation::join('sites','sites.id','=','localisations.site_id')
+        ->where('sites.nom','ilike',$request->input('query').'%')
+        ->orderBy('sites.nom')
+        ->select(
+            'localisations.id',
+            'localisations.site_id',
+            'localisations.suivi_id'
+        )
+        ->paginate(15);
+        return LocalisationResource::collection($participations);
     }
 
     /**
@@ -29,7 +39,7 @@ class LocalisationController extends Controller
     {
         $localisation = Localisation::create($request->all());
         return response([
-            "message"=> "Observation created !",
+            "message"=> "Localisation created !",
             "data" => new LocalisationResource($localisation)
         ],201);
     }

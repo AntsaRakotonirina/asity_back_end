@@ -18,7 +18,7 @@ class ObservationResource extends JsonResource
             "id"=>$this->id,
             "type"=>'Observation',
             "attributes"=> [
-                'animal' => $this->animal ? $this->animal->nom : "",
+                'animal' => $this->animal ? $this->animal->nom->nom : "",
                 'habitat'=> $this->habitat,
                 'latitude'=> $this->latitude,
                 'longitude'=> $this->longitude,
@@ -29,8 +29,8 @@ class ObservationResource extends JsonResource
                 'notes'=> $this->notes ? NoteResource::collection($this->notes) : [],
                 'animal_id'=> $this->animal_id,
                 'suivi_id'=> $this->suivi_id,
-                'site_parent_id' => $this->site_parent_id
+                'date'=>$this->date
             ]
-        ];;
+        ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,16 +16,16 @@ class AuthController extends Controller
     public function login(LoginRequest $request){
         //retrouver l'utilisateur
         $user = User::where('name',$request->input('name'))->first();
-        if(!$user){ 
+        if(!$user){
             return response([
                 'message'=>'Auth error',
                 'errors'=>["user"=>['User not found']],
-            ],404); 
+            ],404);
         }
 
         //verifier son mot de passe
         $password_match = Hash::check($request->input('password'),$user->password);
-        if(!$password_match){ 
+        if(!$password_match){
             return response([
                 'message'=>'Auth error',
                 'errors'=>["password"=>['Password doesn\'t match']],
@@ -35,7 +36,8 @@ class AuthController extends Controller
         $token = $user->createToken('App_token');
         return [
             "message"=>"Auth successfull",
-            "token"=>$token->plainTextToken
+            "token"=>$token->plainTextToken,
+            "user"=>new UserResource($user)
         ];
     }
 
@@ -58,7 +60,7 @@ class AuthController extends Controller
     /**
      * Une route utilitaire pour verifier si le token de l'utilisateur est toujour valid
      */
-    public function checkAuth(){
-        return ["message"=>"You are logged in !"];
+    public function checkAuth(Request $request){
+        return ["message"=>"You are logged in !","data"=>new UserResource($request->user())];
     }
 }

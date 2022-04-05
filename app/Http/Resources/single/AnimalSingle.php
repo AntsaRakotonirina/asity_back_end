@@ -27,6 +27,8 @@ class AnimalSingle extends JsonResource
                 'famille' => $this->famille,
                 'genre' => $this->genre,
                 'guild' => $this->guild,
+                'count_type' => $this->count_type,
+                'curent_name_id' => $this->curent_name_id,
                 'nom_courrant'=>$this->nom ? $this->nom->nom : "",
                 'status' => $this->status,
                 "nom_vernaculaires" => $this->nomVernaculaires ? NameResource::collection($this->nomVernaculaires) : [],

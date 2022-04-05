@@ -19,7 +19,9 @@ class SiteResource extends JsonResource
             "type"=>'Site',
             "attributes"=>[
                 'nom' => $this->nom,
-                'region_id'=> $this->region_id
+                'region_id'=> $this->region_id,
+                'latitude'=> $this->latitude,
+                'longitude'=> $this->longitude
             ]
         ];
     }

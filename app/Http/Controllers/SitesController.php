@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Http\Resources\SiteResource;
@@ -15,10 +16,10 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(SearchRequest $request)
     {
         return SiteResource::collection(
-            Site::where('nom','ilike',$request->input('search').'%')->paginate(15)
+            Site::where('nom','ilike',$request->input('query').'%')->orderBy('nom')->paginate(15)
         );
     }
 

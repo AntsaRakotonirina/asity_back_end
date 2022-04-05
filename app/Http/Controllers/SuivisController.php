@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterSuiviRequest;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreSuiviRequest;
 use App\Http\Requests\UpdateSuiviRequest;
@@ -17,9 +18,25 @@ class SuivisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(FilterSuiviRequest $request)
     {
-        return SuiviResource::collection(Suivi::paginate(15));
+        // if($request->input('from') && $request->input('to')){
+        //     $suivis = Suivi::whereBetween('default_date',[$request->input('from'),$request->input('to')])->orderByDesc('default_date')->paginate(15);
+        // }else{
+        //     $suivis = Suivi::orderByDesc('default_date')->paginate(15);
+        // }
+        
+        /**
+         * Pour des raisons de test on trie le resultat par identifiant
+         * @todo remetre l'ordre
+         */
+        if($request->input('from') && $request->input('to')){
+                $suivis = Suivi::whereBetween('default_date',[$request->input('from'),$request->input('to')])->orderBy('id')->paginate(15);
+            }else{
+                $suivis = Suivi::orderBy('id')->paginate(15);
+            }
+            
+        return SuiviResource::collection($suivis);
     }
 
     /**
@@ -33,7 +50,7 @@ class SuivisController extends Controller
         $suivi = Suivi::create($request->all());
         return response([
             "message"=> "Suivi created !",
-            "data" => new SuiviSingle($suivi)
+            "data" => new SuiviResource($suivi)
         ],201);
     }
 
@@ -59,8 +76,8 @@ class SuivisController extends Controller
     {
         $suivi->update($request->all());
         return response([
-            "message"=> "Suivi created !",
-            "data" => new SuiviSingle($suivi)
+            "message"=> "Suivi updated !",
+            "data" => new SuiviResource($suivi)
         ],201);
     }
 
