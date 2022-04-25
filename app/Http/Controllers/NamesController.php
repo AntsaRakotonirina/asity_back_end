@@ -18,9 +18,6 @@ class NamesController extends Controller
             case 'communs':
                 NomCommun::destroy($id);
                 return ["message"=>"comname deleted !"];
-            case 'scientifiques':
-                NomScientifique::destroy($id);
-                return ["message"=>"sciname deleted !"];
             default:
                 return response(["message"=>"Unknown operation","errors"=>["operation"=>["this operation is not supported"]]],404);
                 break;
@@ -37,10 +34,6 @@ class NamesController extends Controller
                 
                 return NameResource::collection(
                     NomCommun::where('nom','ilike',$request->input('search').'%')
-                );
-            case 'scientifiques':
-                return NameResource::collection(
-                    NomScientifique::where('nom','ilike',$request->input('search').'%')
                 );
             default:
                 return response(["message"=>"Unknown operation","errors"=>["operation"=>["this operation is not supported"]]],404);

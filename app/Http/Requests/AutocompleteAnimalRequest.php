@@ -24,7 +24,7 @@ class AutocompleteAnimalRequest extends FormRequest
     public function rules()
     {
         return [
-            'attribute'=>'required|in:categorie,endemicite,espece,famille,genre,guild,status'
+            'attribute'=>'required|in:classe,endemicite,espece,famille,genre,guild,status'
         ];
     }
 }

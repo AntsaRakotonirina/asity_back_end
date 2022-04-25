@@ -18,7 +18,7 @@ class ObservationResource extends JsonResource
             "id"=>$this->id,
             "type"=>'Observation',
             "attributes"=> [
-                'animal' => $this->animal ? $this->animal->nom->nom : "",
+                'animal' => $this->animal ? $this->animal->nom_scientifique : "",
                 'habitat'=> $this->habitat,
                 'latitude'=> $this->latitude,
                 'longitude'=> $this->longitude,

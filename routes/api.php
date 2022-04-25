@@ -74,6 +74,7 @@ $v1Routes = function (){
     Route::apiResource('participations',ParticipationController::class);
     Route::apiResource('localisations',LocalisationController::class);
     Route::apiResource('sites',SitesController::class);
+    Route::get('animaux/{animaux}/localite',[AnimalsController::class,'getLocalite']);
 };
 
 Route::prefix('/v1')->group($v1Routes);

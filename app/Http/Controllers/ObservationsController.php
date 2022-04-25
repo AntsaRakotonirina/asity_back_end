@@ -21,9 +21,9 @@ class ObservationsController extends Controller
     {
         if($request->input('attribute') === 'animal'){
             $observations = Observation::join('animaux','observations.animal_id','=','animaux.id')
-            ->join('nom_scientifiques','animaux.curent_name_id','=','nom_scientifiques.id')
-            ->where('nom_scientifiques.nom','ilike',$request->input('search').'%')
+            ->where('animaux.nom_scientifique','ilike',$request->input('search').'%')
             ->select(
+                'animaux.nom_scientifique',
                 'observations.id',
                 'observations.habitat',
                 'observations.latitude',
@@ -37,7 +37,10 @@ class ObservationsController extends Controller
             )
             ->paginate(15)
             ;
-        }else{
+        }elseif ($request->input('attribute') === 'suivi_id' || $request->input('attribute') === 'animal_id') {
+            $observations = Observation::where($request->input('attribute'),'=',$request->input('search'))->get();
+        }
+        else{
             $observations = Observation::where($request->input('attribute'),'ilike',$request->input('search').'%')->paginate(15);
         }
         return ObservationResource::collection($observations);

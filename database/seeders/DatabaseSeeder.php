@@ -15,20 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            AnimalSeeder::class,
-            ScientifiqueSeeder::class,
-            SiteParentSeeder::class,
-            SuiviSeeder::class,
-            ObservationSeeder::class,
-            ParticipationSeeder::class,
-            LocalisationSeeder::class
-        ]);
-        \App\Models\User::factory(5)->create();
+        // $this->call([
+        //     AnimalSeeder::class,
+        //     ScientifiqueSeeder::class,
+        //     SiteParentSeeder::class,
+        //     SuiviSeeder::class,
+        //     ObservationSeeder::class,
+        //     ParticipationSeeder::class,
+        //     LocalisationSeeder::class
+        // ]);
+        // \App\Models\User::factory(5)->create();
         \App\Models\User::create([
             'name'=>'Admin',
             'isAdmin'=> true,
             'password' => Hash::make('admin')
+        ]);
+        \App\Models\User::create([
+            'name'=>'Jhon',
+            'isAdmin'=> false,
+            'password' => Hash::make('password')
         ]);
     }
 }

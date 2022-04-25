@@ -15,15 +15,14 @@ class Animal extends Model
      * @var string[]
      */
     protected $fillable = [
-        'categorie',
+        'classe',
         'endemicite',
         'espece',
         'famille',
         'genre' ,
         'guild',
         'status',
-        'count_type',
-        'curent_name_id'
+        'nom_scientifique'
     ];
 
     /**
@@ -41,10 +40,6 @@ class Animal extends Model
         return $this->hasMany(NomCommun::class,'animal_id');
     }
 
-    public function nomScientifiques(){
-        return $this->hasMany(NomScientifique::class,'animal_id');
-    }
-
     public function notes(){
         return $this->morphMany(Note::class,'noteable');
     }
@@ -55,9 +50,5 @@ class Animal extends Model
 
     public function suivis(){
         return $this->belongsToMany(Suivi::class,'observations');
-    }
-
-    public function nom(){
-        return $this->belongsTo(NomScientifique::class,'curent_name_id');
     }
 }

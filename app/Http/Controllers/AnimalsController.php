@@ -6,15 +6,12 @@ use App\Http\Requests\AutocompleteAnimalRequest;
 use App\Http\Requests\FilterAnimalRequest;
 use App\Http\Requests\StoreAnimalRequest;
 use App\Http\Requests\StoreNoteRequest;
-use App\Http\Requests\StoreSciNameRequest;
 use App\Http\Requests\UpdateAnimalRequest;
 use App\Http\Resources\AnimalResource;
 use App\Http\Resources\NameResource;
 use App\Http\Resources\NoteResource;
-use App\Http\Resources\SciNameResource;
 use App\Http\Resources\single\AnimalSingle;
 use App\Models\Animal;
-use DateTime;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -25,34 +22,10 @@ class AnimalsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(FilterAnimalRequest $request){
-
-        /**
-         * La recherche par nom scientifique est  plus complexe car le nom se trouve sur une autre table
-         */
-        if($request->input('attribute') === 'nom'){
-            //on recherche les nom scientifique correspondant
-            $animals = Animal::join('nom_scientifiques','animaux.curent_name_id','=','nom_scientifiques.id')
-            ->where('nom_scientifiques.nom','ilike',$request->input('query').'%')
-            ->select(
-            'animaux.id',
-            'animaux.categorie',
-            'animaux.endemicite',
-            'animaux.espece',
-            'animaux.famille',
-            'animaux.genre',
-            'animaux.guild',
-            'animaux.curent_name_id',
-            'animaux.status'
-            )
-            ->paginate(15);
-        }else{
-            $animals = Animal::
+        $animals = Animal::
             where($request->input('attribute'),'ilike',$request->input('query').'%')
             ->orderBy($request->input('attribute'))
             ->paginate(15);
-        }
-
-        
         return AnimalResource::collection($animals);
     }
 
@@ -65,10 +38,7 @@ class AnimalsController extends Controller
     public function store(StoreAnimalRequest $request)
     {
         $animaux = Animal::create($request->all());
-        $date = new DateTime();
-        $name = $animaux->nomScientifiques()->create(['nom'=>$animaux->genre.' '.$animaux->espece,'mis_a_jour'=>$date->format('d-m-Y')]);
-        $animaux->curent_name_id =  $name->id;
-        $animaux->save();
+        $animaux = Animal::find($animaux->id);
         return response([
             "message"=> "Animal created !",
             "data" => new AnimalResource($animaux)
@@ -160,20 +130,6 @@ class AnimalsController extends Controller
             ]
         ],422);
     }
-    
-    /**
-     * Ajouter un nom scientifique
-     * @param \App\Http\Requests\StoreSciNameRequest
-     * @param  \App\Models\Animal  $animaux
-     * @return \Illuminate\Http\Response
-     */
-    public function addSciName(StoreSciNameRequest $request,Animal $animaux){
-        $sciname = $animaux->nomScientifiques()->create($request->all());
-        return response([
-            "message"=> "Name created !",
-            "data" => new SciNameResource($sciname)
-        ],201);
-    }
 
     /**
      * Ajouter une note
@@ -215,5 +171,22 @@ class AnimalsController extends Controller
             ->orderByRaw('x')
             ->get();
         }
+    }
+
+    public function getLocalite(Animal $animaux){
+        $localite = Animal::join('observations','animaux.id','=','observations.animal_id')
+        ->select('sites.nom as localite','regions.nom as region','site_parents.aireProteger as site')
+        ->join('suivis','suivis.id','=','observations.suivi_id')
+        ->join('localisations','suivis.id','=','localisations.suivi_id')
+        ->join('sites','sites.id','=','localisations.site_id')
+        ->join('regions','regions.id','=','sites.region_id')
+        ->join('site_parents','site_parents.id','=','regions.site_parent_id')
+        ->groupBy('nom_scientifique','sites.nom','regions.nom','site_parents.aireProteger')
+        ->where('animaux.id','=',$animaux->id)
+        ->get();
+        return [
+            "type"=>'localite',
+            "data"=> $localite
+        ];
     }
 }

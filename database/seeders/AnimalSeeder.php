@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Animal;
 use App\Models\NomCommun;
-use App\Models\NomScientifique;
 use App\Models\NomVernaculaire;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +19,6 @@ class AnimalSeeder extends Seeder
         Animal::factory(100)
         ->has(NomCommun::factory(3))
         ->has(NomVernaculaire::factory(3))
-        ->has(NomScientifique::factory(3))
         ->create();
 
         $animals = Animal::all();

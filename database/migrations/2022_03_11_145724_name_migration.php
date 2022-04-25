@@ -20,13 +20,6 @@ class NameMigration extends Migration
             $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
-        Schema::create('nom_scientifiques', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->date('mis_a_jour');
-            $table->foreignId('animal_id')->constrained('animaux')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();
-        });
 
         Schema::create('nom_communs', function (Blueprint $table) {
             $table->id();
@@ -44,7 +37,6 @@ class NameMigration extends Migration
     public function down()
     {
         Schema::dropIfExists('nom_vernaculaires');
-        Schema::dropIfExists('nom_scientifiques');
         Schema::dropIfExists('nom_communs');
     }
 }

@@ -26,15 +26,11 @@ class SuivisController extends Controller
         //     $suivis = Suivi::orderByDesc('default_date')->paginate(15);
         // }
         
-        /**
-         * Pour des raisons de test on trie le resultat par identifiant
-         * @todo remetre l'ordre
-         */
         if($request->input('from') && $request->input('to')){
                 $suivis = Suivi::whereBetween('default_date',[$request->input('from'),$request->input('to')])->orderBy('id')->paginate(15);
-            }else{
-                $suivis = Suivi::orderBy('id')->paginate(15);
-            }
+        }else{
+            $suivis = Suivi::orderBy('genre')->paginate(15);
+        }
             
         return SuiviResource::collection($suivis);
     }

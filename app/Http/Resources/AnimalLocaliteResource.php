@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnimalResource extends JsonResource
+class AnimalLocaliteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,7 @@ class AnimalResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id"=>$this->id,
-            "type"=>'Animal',
+            "type"=>'localite',
             "attributes"=> [
                 'classe' => $this->classe,
                 'espece'  => $this->espece,
@@ -25,6 +24,6 @@ class AnimalResource extends JsonResource
                 'nom_scientifique' => $this->nom_scientifique,
                 'status' => $this->status
             ]
-        ];
+        ];;
     }
 }

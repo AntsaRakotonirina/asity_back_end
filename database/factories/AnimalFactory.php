@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\NomScientifique;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
@@ -17,7 +16,6 @@ class AnimalFactory extends Factory
     {
         $categories = ["Oiseau d'eau","Oiseau forestier","Primate","Amphibien"];
         $endemicites = ['Endemique','Nicheuse',''];
-        $count=['nombre','abondance','presence'];
         $especes = [
             'Newtoni',
             'Hypoleucos',
@@ -81,8 +79,6 @@ class AnimalFactory extends Factory
             'famille' => Arr::random($familles),
             'genre' => Arr::random($genres),
             'guild' => '',
-            // 'count_type' => Arr::random($count),
-            'count_type' => 'nombre',
             'status' => Arr::random($status)
         ];
     }

@@ -24,7 +24,7 @@ class FilterObservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'attribute'=>'required|in:animal,habitat,nombre,abondance,presence,zone'
+            'attribute'=>'required|in:animal,habitat,nombre,abondance,presence,zone,suivi_id,animal_id'
         ];
     }
 }
