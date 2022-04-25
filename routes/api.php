@@ -37,6 +37,8 @@ $v1Routes = function (){
     Route::apiResource('/users',UsersController::class);
     Route::apiResource('/animaux',AnimalsController::class)
     ->except(['index','show']);
+    Route::apiResource('/animaux',AnimalsController::class)
+    ->only(['index','show']);
     Route::prefix('/animaux/{animaux}/nom/')->group(function(){
         Route::post('/vernaculaires',[AnimalsController::class,'addVerName']);
         Route::post('/communs',[AnimalsController::class,'addComnName']);
@@ -53,8 +55,6 @@ $v1Routes = function (){
     Route::post('suivis/{suivi}/notes',[SuivisController::class,'addNote']);
     Route::get('/logout',[AuthController::class,'logout']);
     Route::get('/check',[AuthController::class,'checkAuth']);
-    Route::apiResource('/animaux',AnimalsController::class)
-    ->only(['index','show']);
     Route::apiResource('/scientifiques',ScientifiquesController::class)
     ->only(['index','show']);
     Route::post('/login',[AuthController::class,'login']);
