@@ -29,38 +29,34 @@ $v1Routes = function (){
     //les requestes où il faut etre authentifier
     
     Route::middleware('auth:sanctum')->group(function(){
-        Route::get('/logout',[AuthController::class,'logout']);
-        Route::get('/check',[AuthController::class,'checkAuth']);
-        Route::apiResource('/animaux',AnimalsController::class)
-        ->only(['index','show']);
-        Route::apiResource('/scientifiques',ScientifiquesController::class)
-        ->only(['index','show']);
-
         //les requestes où il faut etre administrateur
         Route::middleware('is.admin')->group(function(){
-            Route::apiResource('/users',UsersController::class);
-            Route::apiResource('/animaux',AnimalsController::class)
-            ->except(['index','show']);
-            Route::prefix('/animaux/{animaux}/nom/')->group(function(){
-                Route::post('/vernaculaires',[AnimalsController::class,'addVerName']);
-                Route::post('/communs',[AnimalsController::class,'addComnName']);
-                Route::post('/scientifiques',[AnimalsController::class,'addSciName']);
-            });
-            Route::delete('/noms/{type}/{id}',[NamesController::class,'deleteName']);
-            Route::post('/animaux/{animaux}/notes/',[AnimalsController::class,'addNote']);
-            
-            Route::apiResource('/scientifiques',ScientifiquesController::class)
-            ->except(['index','show']);
-            Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
-            Route::apiResource('siteparents',SitesParentController::class);
-            Route::apiResource('regions',RegionsController::class);
-            
-            
-            Route::post('suivis/{suivi}/notes',[SuivisController::class,'addNote']);
-            
         });
-        
     });
+
+    Route::apiResource('/users',UsersController::class);
+    Route::apiResource('/animaux',AnimalsController::class)
+    ->except(['index','show']);
+    Route::prefix('/animaux/{animaux}/nom/')->group(function(){
+        Route::post('/vernaculaires',[AnimalsController::class,'addVerName']);
+        Route::post('/communs',[AnimalsController::class,'addComnName']);
+        Route::post('/scientifiques',[AnimalsController::class,'addSciName']);
+    });
+    Route::delete('/noms/{type}/{id}',[NamesController::class,'deleteName']);
+    Route::post('/animaux/{animaux}/notes/',[AnimalsController::class,'addNote']);
+    
+    Route::apiResource('/scientifiques',ScientifiquesController::class)
+    ->except(['index','show']);
+    Route::post('/scientifiques/file',[ScientifiquesController::class,'storeFile']);
+    Route::apiResource('siteparents',SitesParentController::class);
+    Route::apiResource('regions',RegionsController::class);
+    Route::post('suivis/{suivi}/notes',[SuivisController::class,'addNote']);
+    Route::get('/logout',[AuthController::class,'logout']);
+    Route::get('/check',[AuthController::class,'checkAuth']);
+    Route::apiResource('/animaux',AnimalsController::class)
+    ->only(['index','show']);
+    Route::apiResource('/scientifiques',ScientifiquesController::class)
+    ->only(['index','show']);
     Route::post('/login',[AuthController::class,'login']);
     Route::get('siteparents/{siteparent}/regions',[SitesParentController::class,'regions']);
     Route::get('regions/{region}/sites',[RegionsController::class,'sites']);
